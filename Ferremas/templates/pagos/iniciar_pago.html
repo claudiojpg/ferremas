@@ -6,6 +6,12 @@
 </head>
 <body>
     <h1>Iniciar Pago</h1>
+    <h2>Total: {{ total }}</h2>
+    <ul>
+        {% for producto in productos %}
+            <li>{{ producto.nombre }} - {{ producto.precio }} x {{ carrito|get_item:producto.id }}</li>
+        {% endfor %}
+    </ul>
     <form action="{% url 'procesar_pago' %}" method="post">
         {% csrf_token %}
         <button type="submit">Pagar</button>
