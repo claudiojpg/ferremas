@@ -9,3 +9,4 @@ def get_item(dictionary, key):
 @register.filter
 def multiply(value, arg):
     return value * arg
+

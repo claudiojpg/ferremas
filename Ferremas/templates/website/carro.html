@@ -4,42 +4,54 @@
 <html>
 <head>
     <title>Carrito</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Carrito de Compras</h1>
-    {% if productos %}
-        <table>
-            <tr>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-                <th>Total</th>
-            </tr>
-            {% for producto in productos %}
-                <tr>
-                    <td>{{ producto.nombre }}</td>
-                    <td>{{ cantidades|get_item:producto.id }}</td>
-                    <td>{{ producto.precio }}</td>
-                    {% with cantidades|get_item:producto.id as cantidad %}
-                        <td>{{ producto.precio|multiply:cantidad }}</td>
-                    {% endwith %}
-                </tr>
-            {% endfor %}
-            <tr>
-                <td colspan="3">Total:</td>
-                <td>{{ total }}</td>
-            </tr>
-        </table>
-        <form action="{% url 'vaciar_carrito' %}" method="post">
-            {% csrf_token %}
-            <button type="submit">Vaciar Carrito</button>
-        </form>
-    {% else %}
-        <p>El carrito está vacío.</p>
-    {% endif %}
-    <br>
-    <a href="{% url 'index' %}">
-        <button>Volver a la Página Principal</button>
-    </a>
+    <div class="container mt-5">
+        <h1>Carrito de Compras</h1>
+        {% if productos %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for producto in productos %}
+                        <tr>
+                            <td>{{ producto.nombre }}</td>
+                            <td>{{ cantidades|get_item:producto.id }}</td>
+                            <td>${{ producto.precio }}</td>
+                            {% with cantidades|get_item:producto.id as cantidad %}
+                                <td>${{ producto.precio|multiply:cantidad }}</td>
+                            {% endwith %}
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="3"><strong>Total:</strong></td>
+                        <td><strong>${{ total }}</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            <form action="{% url 'vaciar_carrito' %}" method="post" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Vaciar Carrito</button>
+            </form>
+            <form action="{% url 'iniciar_pago' %}" method="post" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Comprar</button>
+            </form>
+        {% else %}
+            <div class="alert alert-warning" role="alert">
+                El carrito está vacío.
+            </div>
+        {% endif %}
+        <br>
+        <a href="{% url 'index' %}" class="btn btn-secondary mt-3">Volver a la Página Principal</a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

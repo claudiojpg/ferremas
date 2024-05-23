@@ -4,6 +4,7 @@ from transbank.webpay.webpay_plus.transaction import Transaction, WebpayOptions
 from transbank.common.integration_type import IntegrationType
 from django.conf import settings
 from .models import Producto
+import hashlib
 
 def index(request):
     productos = Producto.objects.all()  
@@ -53,24 +54,30 @@ from django.conf import settings
 
 def iniciar_pago(request):
     if request.method == "POST":
-        producto_id = request.POST.get('producto_id')
-        producto = Producto.objects.get(id=producto_id)
+        carrito = request.session.get('carrito', {})
+        productos = Producto.objects.filter(id__in=carrito.keys())
+        cantidades = {int(k): v for k, v in carrito.items()}
+        total = sum(producto.precio * cantidades[producto.id] for producto in productos)
+        
+        if total > 0:
+            # Utilizar la clave de sesión y un hash para crear un buy_order más corto
+            session_key = request.session.session_key
+            buy_order = hashlib.md5(session_key.encode()).hexdigest()[:26]
+            session_id = f"sesion_{session_key}"
+            amount = total
+            return_url = request.build_absolute_uri('/pagos/confirmar/')
 
-        buy_order = f"ordenCompra_{producto_id}"
-        session_id = f"sesion_{producto_id}"
-        amount = producto.precio
-        return_url = request.build_absolute_uri('/pagos/confirmar/')
-
-     
-        tx = Transaction(WebpayOptions(settings.TRANBANK_COMMERCE_CODE, settings.TRANBANK_API_KEY, IntegrationType.TEST))
-        try:
-            response = tx.create(buy_order, session_id, amount, return_url)
-            if response:
-                return redirect(response['url'] + "?token_ws=" + response['token'])
-            else:
-                return HttpResponse("No se recibió respuesta de Transbank.")
-        except Exception as e:
-            return HttpResponse(f"Error interno: {str(e)}")
+            tx = Transaction(WebpayOptions(settings.TRANBANK_COMMERCE_CODE, settings.TRANBANK_API_KEY, IntegrationType.TEST))
+            try:
+                response = tx.create(buy_order, session_id, amount, return_url)
+                if response:
+                    return redirect(response['url'] + "?token_ws=" + response['token'])
+                else:
+                    return HttpResponse("No se recibió respuesta de Transbank.")
+            except Exception as e:
+                return HttpResponse(f"Error interno: {str(e)}")
+        else:
+            return HttpResponse("El carrito está vacío.")
     else:
         return HttpResponse("Método no permitido.", status=405)
 def confirmar_pago(request):

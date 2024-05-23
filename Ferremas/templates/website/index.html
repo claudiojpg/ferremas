@@ -1,23 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ferremas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <style>
-        .navbar-custom {
-            background-color: #1d4ed8; /* Blue-700 */
-        }
-        .navbar-custom .navbar-brand,
-        .navbar-custom .nav-link {
-            color: white;
-        }
-        .navbar-custom .nav-link:hover {
-            color: #ddd; /* Slightly lighter shade for hover effect */
-        }
-    </style>
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-custom" data-bs-theme="dark">
@@ -33,7 +23,17 @@
                             Productos
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li class="dropdown-submenu">
+                                <a class="dropdown-item dropdown-toggle" href="#">Categorías</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Herramientas Manuales</a></li>
+                                    <li><a class="dropdown-item" href="#">Materiales Básicos</a></li>
+                                    <li><a class="dropdown-item" href="#">Equipos de Seguridad</a></li>
+                                    <li><a class="dropdown-item" href="#">Tornillos y anclajes</a></li>
+                                    <li><a class="dropdown-item" href="#">Fijaciones y adhesivos</a></li>
+                                    <li><a class="dropdown-item" href="#">Equipos y medicion</a></li>
+                                </ul>
+                            </li>
                             <li><a class="dropdown-item" href="#">Another action</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">Something else here</a></li>
@@ -56,6 +56,7 @@
             </div>
         </div>
     </nav>
+
     <div class="container mt-5">
         {% if mensaje %}
         <div class="alert alert-warning" role="alert">
@@ -70,11 +71,6 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ producto.nombre }}</h5>
                         <p class="card-text">${{ producto.precio }}</p>
-                        <form action="{% url 'iniciar_pago' %}" method="post" class="d-inline">
-                            {% csrf_token %}
-                            <input type="hidden" name="producto_id" value="{{ producto.id }}">
-                            <button type="submit" class="btn btn-primary">Comprar</button>
-                        </form>
                         <form action="{% url 'agregar_al_carrito' %}" method="post" class="d-inline">
                             {% csrf_token %}
                             <input type="hidden" name="producto_id" value="{{ producto.id }}">
@@ -86,6 +82,8 @@
             {% endfor %}
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="{% static 'js/cart.js' %}"></script>
 </body>
 </html>
