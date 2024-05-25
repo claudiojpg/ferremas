@@ -71,10 +71,23 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ producto.nombre }}</h5>
                         <p class="card-text">${{ producto.precio }}</p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                {% if producto.cantidad > 0 %}
+                                    Cantidad en stock: {{ producto.cantidad }}
+                                {% else %}
+                                    <span class="text-danger">Sin stock</span>
+                                {% endif %}
+                            </small>
+                        </p>
                         <form action="{% url 'agregar_al_carrito' %}" method="post" class="d-inline">
                             {% csrf_token %}
                             <input type="hidden" name="producto_id" value="{{ producto.id }}">
-                            <button type="submit" class="btn btn-secondary">Añadir al carrito</button>
+                            {% if producto.cantidad > 0 %}
+                                <button type="submit" class="btn btn-secondary">Añadir al carrito</button>
+                            {% else %}
+                                <button type="button" class="btn btn-secondary" disabled>Sin stock</button>
+                            {% endif %}
                         </form>
                     </div>
                 </div>
