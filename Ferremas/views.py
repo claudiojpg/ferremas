@@ -12,6 +12,8 @@ def index(request):
     carrito = request.session.get('carrito', {})
     total_productos = sum(carrito.values())
     mensaje = request.session.pop('mensaje', None)
+        
+ 
     return render(request, 'website/index.html', {
         'productos': productos,
         'total_productos': total_productos,

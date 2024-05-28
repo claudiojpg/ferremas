@@ -1,4 +1,8 @@
-from django.urls import path
+from django.urls import include, path
+from django.conf.urls.static import static
+
+from miwebpay import settings
+
 from . import views
 
 urlpatterns = [
@@ -9,3 +13,4 @@ urlpatterns = [
     path('pagos/iniciar/', views.iniciar_pago, name='iniciar_pago'),
     path('pagos/confirmar/', views.confirmar_pago, name='confirmar_pago'),
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
