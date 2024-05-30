@@ -67,7 +67,7 @@ def iniciar_pago(request):
                 if response:
                     return redirect(response['url'] + "?token_ws=" + response['token'])
                 else:
-                    return HttpResponse("No se recibió respuesta de Transbank.")
+                    return render(request, 'transaccion_rechazada.html', context)
             except Exception as e:
                 return HttpResponse(f"Error interno: {str(e)}")
         else:
@@ -96,7 +96,7 @@ def confirmar_pago(request):
 
             return render(request, 'website/confirmacion_pago.html', {'response': response})
         else:
-            return HttpResponse("No se recibió respuesta de Transbank.")
+           return render(request, 'website/transaccion_rechazada.html', {'response': response})
     except Exception as e:
         return HttpResponse(f"Error interno: {str(e)}")
 
