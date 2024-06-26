@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect, HttpResponse
+from multiprocessing import context
+from django.shortcuts import get_object_or_404, render, redirect, HttpResponse
 from django.http import JsonResponse  
 from transbank.webpay.webpay_plus.transaction import Transaction, WebpayOptions
 from transbank.common.integration_type import IntegrationType
@@ -106,3 +107,10 @@ def vaciar_carrito(request):
     if 'carrito' in request.session:
         del request.session['carrito']
     return redirect('mostrar_carrito')
+
+def detalle_producto(request, id):
+    producto = get_object_or_404(Producto, id=id)  # Obtiene el producto o muestra 404 si no existe
+    context = {
+        'producto': producto,  # Agrega el producto al contexto
+    }
+    return render(request, 'website/producto.html', context)

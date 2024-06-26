@@ -5,85 +5,155 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ferremas</title>
+    <link rel="icon" type="image/jpg" href="{% static 'img/favicon.png' %}"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
-    <style>
-        /* Estilos adicionales personalizados si los necesitas */
-    </style>
+ 		<!-- Google font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <header>
-        <div id="topbar" class="bg-cover clearfix pt-3">
-            <h2 class="logo"><a href="#">Ferremas</a></h2>
-            <div class="text-center">
-              <ul class="list-unstyled list-inline">
-                  <li class="list-inline-item">
-                      <a href="#" class="text-dark"><i class="bi bi-facebook"></i></a>
-                  </li>
-                  <li class="list-inline-item">
-                      <a href="#" class="text-dark"><i class="bi bi-instagram"></i></a>
-                  </li>
-                  <li class="list-inline-item">
-                      <a href="#" class="text-dark"><i class="bi bi-twitter"></i></a>
-                  </li>
-                  <li class="list-inline-item">
-                      <a href="#" class="text-dark"><i class="bi bi-google"></i></a>
-                  </li>
-                  <li class="list-inline-item">
-                      <a href="#" class="text-dark"><i class="bi bi-whatsapp"></i></a>
-                  </li>
-              </ul>
-            </div>
-        </div>
-        
-        <nav class="navbar navbar-expand-lg navbar-custom ">
-            <div class="container">
-                <a class="navbar-brand" href="#">Inicio</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Productos
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="dropdown-submenu">
-                                    <a class="dropdown-item dropdown-toggle" href="#">Categorías</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Herramientas Manuales</a></li>
-                                        <li><a class="dropdown-item" href="#">Materiales Básicos</a></li>
-                                        <li><a class="dropdown-item" href="#">Equipos de Seguridad</a></li>
-                                        <li><a class="dropdown-item" href="#">Tornillos y anclajes</a></li>
-                                        <li><a class="dropdown-item" href="#">Fijaciones y adhesivos</a></li>
-                                        <li><a class="dropdown-item" href="#">Equipos y medicion</a></li>
-                                    </ul>
-                                </li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="¿Qué estás buscando?" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Buscar</button>
-                    </form>
-                    <a href="{% url 'mostrar_carrito' %}" class="btn btn-outline-light ms-3 position-relative">
-                        <i class="bi bi-cart"></i> Carrito
-                        {% if total_productos > 0 %}
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            {{ total_productos }}
-                            <span class="visually-hidden">productos en el carrito</span>
-                        </span>
-                        {% endif %}
-                    </a>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <!-- HEADER -->
+		<header>
+		
+			<div id="top-header">
+				<div class="container">
+				
+					<ul class="header-links pull-right" style="float: right;">
+						<li><a href="#"class="custom-font"><i class="bi bi-currency-dollar icon-small"></i> USD</a></li>
+						<li><a href="#"class="custom-font"><i class="bi bi-person icon-small"></i> Mi Cuenta</a></li>
+					</ul>
+				</div>
+			</div>
+		
+			<div id="header">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<!-- LOGO -->
+						<div class="col-md-3">
+							<div class="header-logo">
+								<a href="#" class="logo">
+									<img src="{% static 'img/logo.png' %}" alt="">
+								</a>
+							</div>
+						</div>
+						<!-- /LOGO -->
+
+						<!-- Buscar -->
+						<div class="col-md-6">
+							<div class="header-search">
+								<form>
+									<select class="input-select">
+										<option value="0">Categoria</option>
+										<option value="1">Herramientas</option>
+										<option value="1">Seguridad</option>
+									</select>
+									<input class="input" placeholder="Buscar">
+									<button class="search-btn"><i class="bi bi-search"></i></button>
+								</form>
+							</div>
+						</div> 
+						<!-- /Buscar -->
+
+						<!-- ACCOUNT -->
+						<div class="col-md-3 clearfix">
+							<div class="header-ctn custom-font">
+								<!-- Favoritos -->
+								<div >
+									<a href="#"class="custom-font">
+										<i class="bi bi-heart-fill custom-font"></i>
+										<span >Favoritos</span>
+										<!-- <div class="qty"></div> -->
+									</a>
+								</div>
+								<!-- /Favoritos -->
+
+								<!-- Cart -->
+								<div class="">
+	                                    <a href="{% url 'mostrar_carrito' %}" class="custom-font" >
+                                        <i class="bi bi-cart"></i> 			<span >Carrito</span>
+                                        {% if total_productos > 0 %}
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            {{ total_productos }}
+                                            <span class="visually-hidden">productos en el carrito</span>
+                                        </span>
+                                        {% endif %}
+                                    </a>
+									
+								</div>
+								<!-- /Cart -->
+
+								<!-- Menu Toogle -->
+								<div class="menu-toggle">
+									<a href="#">
+										<i class="bi bi-list"></i>
+										<span>Menu</span>
+									</a>
+								</div>
+								<!-- /Menu Toogle -->
+							</div>
+						</div>
+						<!-- /ACCOUNT -->
+					</div>
+					<!-- row -->
+				</div>
+				<!-- container -->
+			</div>
+			<!-- /MAIN HEADER -->
+		</header>
+		<!-- /HEADER -->
+
+        	<!-- NAVIGATION -->
+		<nav id="navigation">
+			<!-- container -->
+			<div class="container">
+				<!-- responsive-nav -->
+				 <div id="responsive-nav">
+					<!-- NAV -->
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                          <a class="navbar-brand custom-font" href="#">Inicio</a>
+                          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                            <li class="nav-item active">
+                              <a class="nav-link custom-font" href="#">Ofertas </a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link custom-font" href="#">Herramientas</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link custom-font" href="#">Materiales</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link custom-font" href="#">Equipos de Seguridad</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link custom-font" href="#">Tornillos y anclajes</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link custom-font" href="#">Otros</a>
+                              </li>
+                          </ul>
+                       
+                        </div>
+                      </nav>
+					<!-- /NAV -->
+				</div> 
+				<!-- /responsive-nav -->
+          
+			</div>
+			<!-- /container -->
+		</nav>
+		<!-- /NAVIGATION -->
 
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
@@ -98,104 +168,247 @@
           </div>
         </div>
       </div>
-    <div class="container mt-5">
-        {% if mensaje %}
-        <div class="alert alert-warning" role="alert">
-            {{ mensaje }}
-        </div>
-        {% endif %}
+
+
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<!-- shop -->
+					<div class="col-md-4 col-xs-6">
+						<div class="shop">
+							<div class="shop-img">
+								<img src="{% static 'img/product01.png' %}" alt="">
+							</div>
+							<div class="shop-body">
+								<h3>Herramientas<br></h3>
+								<a href="#" class="cta-btn custom-font">Ver más <i class="bi bi-arrow-right-circle-fill"></i></i></a>
+							</div>
+						</div>
+					</div>
+					<!-- /shop -->
+
+					<!-- shop -->
+					<div class="col-md-4 col-xs-6">
+						<div class="shop">
+							<div class="shop-img">
+								<img src="{% static 'img/product02.png' %}" alt="">
+							</div>
+							<div class="shop-body">
+								<h3>Seguridad<br></h3>
+								<a href="#" class="cta-btn custom-font">Ver más <i class="bi bi-arrow-right-circle-fill"></i></i></a>
+							</div>
+						</div>
+					</div>
+					<!-- /shop -->
+
+					<!-- shop -->
+					<div class="col-md-4 col-xs-6">
+						<div class="shop">
+							<div class="shop-img">
+								<img src="{% static 'img/product03.png' %}" alt="">
+							</div>
+							<div class="shop-body">
+								<h3>ASDA<br></h3>
+								<a href="#" class="cta-btn custom-font">Ver más <i class="bi bi-arrow-right-circle-fill"></i></a>
+							</div>
+						</div>
+					</div>
+					<!-- /shop -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
         <div class="row">
-            {% for producto in productos %}
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <img src="media/{{producto.img_producto}}" class="card-img-top" alt="{{ producto.nombre }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ producto.nombre }}</h5>
-                        <p class="card-text">${{ producto.precio }}</p>
-                        <p class="card-text">
-                            <small class="text-muted">
-                                {% if producto.cantidad > 0 %}
-                                    Cantidad en stock: {{ producto.cantidad }}
-                                {% else %}
-                                    <span class="text-danger">Sin stock</span>
-                                {% endif %}
-                            </small>
-                        </p>
-                        <form action="{% url 'agregar_al_carrito' %}" method="post" class="d-inline">
-                            {% csrf_token %}
-                            <input type="hidden" name="producto_id" value="{{ producto.id }}">
-                            {% if producto.cantidad > 0 %}
-                                <button type="submit" class="btn btn-secondary">Añadir al carrito</button>
-                            {% else %}
-                                <button type="button" class="btn btn-secondary" disabled>Sin stock</button>
-                            {% endif %}
-                        </form>
+
+            <!-- section title -->
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h3 class="title">Productos </h3>
+                    <div class="section-nav">
+                        <ul class="section-tab-nav tab-nav">
+                            <li class="active"><a data-toggle="tab" href="#tab1"class="custom-font">Herramientas</a></li>
+                            <li ><a data-toggle="tab" href="#tab1" class="custom-font">Seguridad</a></li>
+                            <li><a data-toggle="tab" href="#tab1" class="custom-font">Materiales</a></li>
+                            <li><a data-toggle="tab" href="#tab1" class="custom-font">Otros</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            {% endfor %}
+            <!-- /section title -->
+	<!-- SECTION -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            {% if mensaje %}
+            <div class="alert alert-warning" role="alert">
+                {{ mensaje }}
+            </div>
+            {% endif %}
+            <!-- row -->
+            <div class="row">
+                {% for producto in productos %}
+                <!-- shop -->
+                <div class="col-md-3 col-xs-6">
+               
+
+                    <div class="product">
+                            <div class="product-img">
+                                <img src="{% if producto.img_producto %}media/{{ producto.img_producto }}{% else %}{% static 'img/default.png' %}{% endif %}" alt="">
+
+
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">Categoría</p>
+                                <h3 class="product-name"><a href="#">{{ producto.nombre }}</a></h3>
+                                <h4 class="product-price">${{ producto.precio }} <del class="product-old-price">$990.00</del></h4>
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        {% if producto.cantidad > 0 %}
+                                            Cantidad en stock: {{ producto.cantidad }}
+                                        {% else %}
+                                            <span class="text-danger">Sin stock</span>
+                                        {% endif %}
+                                    </small>
+                                </p>
+        
+                                <div class="product-rating">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+                                <div class="product-btns">
+                                    <button class="add-to-wishlist"><i class="bi bi-heart"></i><span class="tooltipp">Favorito</span></button>
+                                    <button class="add-to-compare"><i class="bi bi-box-arrow-up-right"></i><span class="tooltipp">Compartir</span></button>
+
+                                    <a href="{% url 'detalle_producto' producto.id%}" class="quick-view"><i class="bi bi-eye"></i><span class="tooltipp"></span> </a>                                </div>
+                            </div>
+                            <div class="add-to-cart">
+                                <form action="{% url 'agregar_al_carrito' %}" method="post" class="d-inline">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="producto_id" value="{{ producto.id }}">
+                                    {% if producto.cantidad > 0 %}
+        
+                                <button class="add-to-cart-btn"><i class="bi bi-cart-fill"></i>Agregar</button>
+                                {% else %}
+                                <button type="button" class="btn btn-secondary" disabled>Sin stock</button>
+                            {% endif %}
+                        </form>
+
+                            </div>
+                    </div>
+                </div>                <div id="slick-nav-1" class="products-slick-nav"></div>
+                <br>
+                <!-- /shop -->
+
+                {% endfor %}
+             
+            <!-- /row -->
         </div>
+        <!-- /container -->
     </div>
+    <!-- /SECTION -->
+<br>
+								
+        </div>
+        <!-- /row -->
+     
+    </div>
+    <!-- /container -->
+</div>
+</div>
+<br>
+<!-- /SECTION -->
 
     <footer class="bg-dark text-white pt-5 pb-4">
         <div class="container text-center text-md-start">
             <div class="row text-center text-md-start">
                 <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                    <h5 class="text-uppercase mb-4 font-weight-bold text-white">Nosotros</h5>
+                    <h5 class="text-uppercase mb-4 font-weight-bold text-white custom-font">Nosotros</h5>
                     <hr class="mb-4">
-                    <p class="text-secondary">Somos una ferretería fundada por un equipo de entusiastas del bricolaje, provenientes de diferentes ámbitos relacionados con la construcción y el mantenimiento. Cansados de las opciones tradicionales y en busca de un enfoque más cercano y personalizado, decidimos establecer nuestra ferretería llamada “Ferremas”.
+                    <p class="text-secondary custom-font">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut dignissimos veritatis cupiditate ipsum natus voluptatum!
+                    </p>
+                    <p>
+                        <a href="#" class="custom-font"><i class="bi bi-telephone-fill icon-small"></i> +123456</a>
+                    </p>
+              
+                  
+                    <p>
+                        <a href="#" class="custom-font"><i class="bi bi-envelope icon-small"></i> ferremas@email.com</a>
+                    </p>
+                    <p>
+                        <a href="#" class="custom-font"><i class="bi bi-geo-alt-fill icon-small"></i></i> Av. Américo Vespucio 1501</a>
                     </p>
                 </div>
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                    <h5 class="text-uppercase mb-4 font-wight-bold text-white">Cuenta</h5>
+                    <h5 class="text-uppercase mb-4 font-wight-bold text-white custom-font">Categorias</h5>
                     <hr class="mb-4">
                     <p>
-                        <a href="#" class="text-secondary">Tu cuenta</a>
+                        <a href="#" class="text-secondary custom-font">Ofertas</a>
                     </p>
                     <p>
-                        <a href="#" class="text-secondary">Manejo de cuenta</a>
+                        <a href="#" class="text-secondary custom-font">Herramientas</a>
                     </p>
                     <p>
-                        <a href="#" class="text-secondary">Contacto</a>
+                        <a href="#" class="text-secondary custom-font">Materiales</a>
                     </p>
                     <p>
-                        <a href="#" class="text-secondary">Ayuda</a>
+                        <a href="#" class="text-secondary custom-font">Equipos de Seguridad</a>
+                    </p>
+                    <p>
+                        <a href="#" class="text-secondary custom-font">Otros</a>
                     </p>
                 </div>
     
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                    <h5 class="text-uppercase mb-4 font-wight-bold text-white">Categoria</h5>
+                    <h5 class="text-uppercase mb-4 font-wight-bold text-white">Información</h5>
                       <hr class="mb-4">
                     <p>
-                        <a href="#" class="text-secondary">Herramientas manuales</a>
+                        <a href="#" class="text-secondary custom-font">Acerca de Nosotros</a>
                     </p>
                     <p>
-                        <a href="#" class="text-secondary">Herramientas eléctricas</a>
+                        <a href="#" class="text-secondary custom-font">Contáctanos</a>
                     </p>
                     <p>
-                        <a href="#" class="text-secondary">Materiales de construcción</a>
+                        <a href="#" class="text-secondary custom-font">Politicas de Privacidad</a>
                     </p>
                     <p>
-                        <a href="#" class="text-secondary">Equipos de seguridad y protección</a>
+                        <a href="#" class="text-secondary custom-font">Ordenes y Devoluciones</a>
                     </p>
                 </div>
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                    <h5 class="text-uppercase mb-4 font-wight-bold text-white">Contacto</h5>
+                    <h5 class="text-uppercase mb-4 font-wight-bold text-white">Servicios</h5>
                     <hr class="mb-4">
                     <p>
-                        <i class="bi bi-house-fill"></i>  Duoc Uc
+                        <a href="#" class="text-secondary custom-font">Mi cuenta</a>
+
                         
                     </p>
                     <p>
-                        <i class="bi bi-envelope-fill"></i> berleval@g.c
+                        <a href="#" class="text-secondary custom-font">Mi carrito</a>
+
                         
                     </p>
                     <p>
-                        <i class="bi bi-telephone-fill"></i>+5690000000
+                        <a href="#" class="text-secondary custom-font">Seguir mi orden</a>
+
                         
                     </p>
                     <p>
-                        <i class="bi bi-telephone-fill"></i>+5690000000
+                        <a href="#" class="text-secondary custom-font">Ayuda</a>
                         
                     </p>
                   
@@ -207,7 +420,7 @@
                     <p>
                         Copyright Todos los derechos reservados 
                         <a href="#">
-                            <strong class="text-sucess">Berleval</strong>
+                            <strong class="text-sucess custom-font">Berleval</strong>
                         </a>
                     </p>
     
@@ -239,5 +452,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="{% static 'js/cart.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
